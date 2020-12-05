@@ -1,6 +1,9 @@
 import org.junit.Assert;
 import org.junit.Test;
 import products.Product;
+import products.ProductFactory;
+import products.extra.ExtraName;
+import products.ProductName;
 
 public class ShopperTest {
 
@@ -36,4 +39,20 @@ public class ShopperTest {
         Assert.assertEquals(8.00, price  ,DELTA);
     }
 
+    @Test
+    public void whenShopperPurchaseOneProductWithExtra_thenTheTicketPriceIsTheSum(){
+        //Given
+        Shopper shopper = new Shopper();
+        Product firstProduct = ProductFactory.create(ProductName.LARGE_COFFEE).with(ExtraName.MILK);
+
+        //When
+        shopper.buy(firstProduct);
+        double price = shopper.getTotalPriceCHF();
+
+        //Then
+        Assert.assertEquals(3.8, price, DELTA);
+    }
+
+    //She decides to offer a customer stamp card, where every 5th beverage is for free.
+    //If a customer orders a beverage and a snack, one of the products.extra's is free.
 }

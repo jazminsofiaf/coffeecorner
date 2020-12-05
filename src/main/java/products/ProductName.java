@@ -1,3 +1,5 @@
+package products;
+
 public enum ProductName {
     SMALL_COFFEE("SMALL COFFEE"),
     MEDIUM_COFFEE("MEDIUM COFFEE"),
@@ -19,7 +21,5 @@ public enum ProductName {
         }
         return null;
     }
-
-
 
 }
