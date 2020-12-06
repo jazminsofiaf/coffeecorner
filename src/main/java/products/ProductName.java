@@ -1,11 +1,13 @@
 package products;
 
+import java.util.Optional;
+
 public enum ProductName {
-    SMALL_COFFEE("SMALL COFFEE"),
-    MEDIUM_COFFEE("MEDIUM COFFEE"),
-    LARGE_COFFEE("LARGE COFFEE"),
-    BACON_ROLL("BACON ROLL"),
-    ORANGE_JUICE("ORANGE JUICE");
+    SMALL_COFFEE("SMALL"),
+    MEDIUM_COFFEE("MEDIUM"),
+    LARGE_COFFEE("LARGE"),
+    BACON_ROLL("BACON"),
+    ORANGE_JUICE("JUICE");
 
     public final String name;
 
@@ -13,13 +15,13 @@ public enum ProductName {
         this.name = name;
     }
 
-    public static ProductName getFromOrder(String order) {
+    public static Optional<ProductName> getFromOrder(String order) {
         for (ProductName element : values()) {
-            if (element.name.equals(order.toUpperCase())) {
-                return element;
+            if (order.toUpperCase().contains(element.name)){
+                return Optional.of(element);
             }
         }
-        return null;
+        return Optional.empty();
     }
 
 }

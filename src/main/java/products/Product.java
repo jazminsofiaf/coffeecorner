@@ -6,22 +6,31 @@ import products.extra.ExtraName;
 import java.util.*;
 
 public abstract class Product {
-    private final double price;
-    private Set<Product> extra;
+    private final double unitPrice;
 
     protected Product(double price) {
-        this.price = price;
-        this.extra = new HashSet<>();
-    }
-
-    public Product with(ExtraName extraName){
-        Product extra = ExtraFactory.create(extraName);
-        this.extra.add(extra);
-        return this;
+        this.unitPrice = price;
     }
 
     public Double getPrice() {
-        return this.price + extra.stream().map(extra -> extra.getPrice()).reduce(Double::sum).orElse(0.0);
+        return this.unitPrice;
+    }
+
+    public boolean isABeverage(){
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Double.compare(product.unitPrice, unitPrice) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(unitPrice);
     }
 
 

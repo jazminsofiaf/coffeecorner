@@ -1,9 +1,11 @@
 package products.extra;
 
+import java.util.Optional;
+
 public enum ExtraName {
-    MILK("SMALL COFFEE"),
-    FOAMED_MILK("MEDIUM COFFEE"),
-    SPECIAL_ROAST("LARGE COFFEE");
+    MILK("MILK"),
+    FOAMED_MILK("FOAMED"),
+    SPECIAL_ROAST("SPECIAL_ROAST");
 
     public final String name;
 
@@ -11,12 +13,12 @@ public enum ExtraName {
         this.name = name;
     }
 
-    public static ExtraName getFromOrder(String order) {
+    public static Optional<ExtraName> getFromOrder(String order) {
         for (ExtraName element : values()) {
-            if (element.name.equals(order.toUpperCase())) {
-                return element;
+            if (order.toUpperCase().contains(element.name)) {
+                return Optional.of(element);
             }
         }
-        return null;
+        return Optional.empty();
     }
 }
